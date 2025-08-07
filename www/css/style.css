@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "Shabnam";
+    src: url("../fonts/Shabnam.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+}
+
+body {
+    font-family: Shabnam, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #263238;
+    color: #fff;
+    direction: rtl;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.page {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page.active {
+    display: flex;
+}
+
+.header {
+    padding: 15px;
+    text-align: center;
+    background-color: #1a2327;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    background-color: #1a2327;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #37474f;
+    border-radius: 4px;
+    background-color: #37474f;
+    color: #fff;
+    font-family: Shabnam;
+    direction: ltr;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: Shabnam;
+    cursor: pointer;
+}
+
+.btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: Shabnam;
+    font-size: 16px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+#browser-container {
+    height: 100%;
+    width: 100%;
+}
+
+.version {
+    color: #999;
+    margin: 5px 0;
+  }
