@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>HRLink</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="auth-page" class="page active">
+            <div class="header">
+                <h1>HRLink</h1>
+            </div>
+            <div class="content">
+                <input type="text" id="apiUrl" placeholder="لینک را اینجا بزار" />
+                <button id="fetchBtn" class="btn">ارسال</button>
+                <div id="status"></div>
+            </div>
+            <div class="footer">
+                <p class="version">ver5.0</p>
+                <p><a href="https://pt.clickroi.ir" target="_blank">دانلود آخرین نسخه</a></p>
+            </div>
+        </div>
+        
+        <div id="browser-page" class="page">
+            <div class="header">
+                <button id="backBtn" class="back-btn">← بازگشت</button>
+                <h1>Snappfood</h1>
+            </div>
+            <div class="content">
+                <div id="browser-container"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="cordova.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
