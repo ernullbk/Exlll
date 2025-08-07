@@ -1,0 +1,82 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        api-level: 33
+        build-tools: 33.0.2
+        
+    - name: Accept Android SDK licenses
+      run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+      
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Cordova CLI
+      run: npm install -g cordova@latest
+      
+    - name: Add Android platform
+      run: cordova platform add android@latest
+      
+    - name: Install plugins
+      run: |
+        cordova plugin add cordova-plugin-whitelist
+        cordova plugin add cordova-plugin-inappbrowser
+        cordova plugin add cordova-plugin-dialogs
+        cordova plugin add cordova-plugin-network-information
+        cordova plugin add cordova-plugin-device
+        
+    - name: Prepare Cordova
+      run: cordova prepare android
+      
+    - name: Build Android APK
+      run: cordova build android --debug
+      
+    - name: List build outputs
+      run: |
+        echo "Build outputs:"
+        find platforms/android/app/build/outputs -name "*.apk" -type f
+        
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apk
+        path: platforms/android/app/build/outputs/apk/debug/*.apk
+        retention-days: 30
+        
+    - name: Upload build logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs
+        path: |
+          platforms/android/app/build/outputs/logs/
+          *.log
+        retention-days: 7
